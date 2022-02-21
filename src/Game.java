@@ -22,15 +22,13 @@ public class Game implements Runnable {
     private final World world;
 
     public Game() {
-        Entity[] entities = new Entity[1000];
+        Entity[] entities = new Entity[100000];
 
         Util.println(WINDOW_SIZE.getWidth());
         Util.println(WINDOW_SIZE.getHeight());
         for (int i = 0; i < entities.length; i++) {
             float xPos = (float) (Math.random() * WINDOW_SIZE.getWidth());
             float yPos = (float) (Math.random() * WINDOW_SIZE.getHeight());
-            Util.println(xPos);
-            Util.println(yPos);
             PositionComponent position = new PositionComponent(xPos, yPos);
 
             float dimension = (float) (Math.random() * 100 + 50);
