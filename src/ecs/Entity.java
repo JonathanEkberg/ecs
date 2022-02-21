@@ -1,25 +1,28 @@
 package ecs;
 
-import java.util.ArrayList;
-
 public class Entity {
-    protected final ArrayList<Component> components;
+    private static int lastId = 0;
+
+    private final int id;
+
+    protected final Component[] components;
 
     public Entity(Component[] components) {
-        this.components = new ArrayList<>(components.length);
+        this.id = ++lastId;
+        this.components = components;
+    }
 
-        for (Component component : components) {
-            this.components.add(component);
-        }
+    public int getId() {
+        return id;
     }
 
     public Component[] getComponents() {
-        return components.toArray(new Component[0]);
+        return components;
     }
 
-    public boolean hasComponent(Class<?> searcing) {
+    public boolean hasComponent(Class<?> searching) {
         for (Component component : components) {
-            if (component.getClass().isAssignableFrom(searcing.getClass())) {
+            if (searching.isAssignableFrom(component.getClass())) {
                 return true;
             }
         }

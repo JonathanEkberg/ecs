@@ -12,11 +12,11 @@ public class ExecuteState {
         this.entities = entities;
     }
 
-    Graphics getGraphics() {
+    public Graphics getGraphics() {
         return graphics;
     }
 
-    List<Entity> getEntities() {
+    public List<Entity> getEntities() {
         return entities;
     }
 }
