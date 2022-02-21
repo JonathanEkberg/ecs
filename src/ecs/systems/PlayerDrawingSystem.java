@@ -1,24 +1,21 @@
 package ecs.systems;
 
-import java.awt.Graphics;
-
-import ecs.Component;
-import ecs.DrawingSystem;
-import ecs.Entity;
+import ecs.PerformState;
+import ecs.System;
 import ecs.Util;
 import ecs.components.PlayerComponent;
 import ecs.entities.PlayerEntity;
 
-public class PlayerDrawingSystem extends DrawingSystem {
+public class PlayerDrawingSystem extends System {
     public PlayerDrawingSystem() {
-        super(new Component[] {
-                new PlayerComponent(),
+        super(new Class<?>[] {
+                PlayerComponent.class
         });
     }
 
     @Override
-    protected void perform(Entity entity, Graphics g) {
-        PlayerEntity playerEntity = (PlayerEntity) entity;
+    public void perform(PerformState state) {
+        PlayerEntity playerEntity = (PlayerEntity) state.getEntity();
 
         int x = (int) playerEntity.position.xPos;
         int y = (int) playerEntity.position.yPos;
@@ -28,6 +25,6 @@ public class PlayerDrawingSystem extends DrawingSystem {
 
         Util.print(String.format("%d %d %d %d", x, y, width, height));
 
-        g.fillRect(x, y, width, height);
+        state.getGraphics().fillRect(x, y, width, height);
     }
 }
