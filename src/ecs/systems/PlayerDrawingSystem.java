@@ -15,6 +15,7 @@ public class PlayerDrawingSystem extends System {
 
     @Override
     public void perform(PerformState state) {
+        Util.println("HEY");
         PlayerEntity playerEntity = (PlayerEntity) state.getEntity();
 
         int x = (int) playerEntity.position.xPos;

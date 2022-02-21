@@ -20,20 +20,20 @@ public abstract class System {
         if (previousEntityMapHash != state.getEntities().hashCode()) {
             previouslyUsed = new ArrayList<>();
 
-            a: for (Entity entity : state.getEntities()) {
+            for (Entity entity : state.getEntities()) {
                 for (Class<?> component : dependencies) {
                     if (!entity.hasComponent(component)) {
-                        continue a;
+                        break;
                     }
 
-                    perform(new PerformState(entity, graphics));
+                    this.perform(new PerformState(entity, graphics));
                     previouslyUsed.add(entity);
                 }
             }
         }
 
         for (Entity entity : previouslyUsed) {
-            perform(new PerformState(entity, graphics));
+            this.perform(new PerformState(entity, graphics));
         }
     }
 

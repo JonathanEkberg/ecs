@@ -3,9 +3,6 @@ package ecs;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import ecs.systems.IDrawingSystem;
-import ecs.systems.ISystem;
-
 public class World {
     private final ArrayList<Entity> entities;
     private final ArrayList<System> systems;
@@ -23,23 +20,11 @@ public class World {
         }
     }
 
-    public void execute() {
-        for (System system : systems) {
-            if (system instanceof ISystem) {
-                Util.println(system);
-                ((ISystem) system).execute(entities);
-            }
-        }
-    }
+    public void execute(Graphics g) {
+        ExecuteState state = new ExecuteState(g, entities);
 
-    public void draw(Graphics g) {
         for (System system : systems) {
-            if (IDrawingSystem.class.isAssignableFrom(system.getClass())) {
-                ((IDrawingSystem) system).execute(entities, g);
-                continue;
-            }
-
-            Util.println("Not an instance of IDrawingSystem!");
+            system.execute(state);
         }
     }
 }

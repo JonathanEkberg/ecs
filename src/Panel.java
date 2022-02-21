@@ -21,18 +21,17 @@ public class Panel extends JPanel implements ActionListener {
     }
 
     private void update() {
-        world.execute();
         repaint();
-    }
-
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        world.draw(g);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         update();
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        world.execute(g);
     }
 }

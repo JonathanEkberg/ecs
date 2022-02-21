@@ -1,9 +1,5 @@
 package ecs.systems;
 
-import java.util.ArrayList;
-
-import ecs.Component;
-import ecs.Entity;
 import ecs.PerformState;
 import ecs.System;
 import ecs.components.PlayerComponent;
