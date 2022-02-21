@@ -1,8 +1,8 @@
 package ecs;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.Graphics;
 
 public abstract class System {
     protected final Class<?>[] dependencies;
@@ -26,14 +26,16 @@ public abstract class System {
                         break;
                     }
 
-                    this.perform(new PerformState(entity, graphics));
+                    perform(new PerformState(entity, graphics));
                     previouslyUsed.add(entity);
                 }
             }
+            previousEntityMapHash = state.getEntities().hashCode();
+            return;
         }
 
         for (Entity entity : previouslyUsed) {
-            this.perform(new PerformState(entity, graphics));
+            perform(new PerformState(entity, graphics));
         }
     }
 

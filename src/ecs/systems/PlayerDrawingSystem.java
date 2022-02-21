@@ -18,11 +18,11 @@ public class PlayerDrawingSystem extends System {
         Util.println("HEY");
         PlayerEntity playerEntity = (PlayerEntity) state.getEntity();
 
-        int x = (int) playerEntity.position.xPos;
-        int y = (int) playerEntity.position.yPos;
+        int x = (int) playerEntity.getPosition().xPos;
+        int y = (int) playerEntity.getPosition().yPos;
 
-        int width = (int) playerEntity.size.getWidth();
-        int height = (int) playerEntity.size.getHeight();
+        int width = (int) playerEntity.getSize().getWidth();
+        int height = (int) playerEntity.getSize().getHeight();
 
         Util.print(String.format("%d %d %d %d", x, y, width, height));
 

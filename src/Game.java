@@ -1,17 +1,16 @@
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 import ecs.Entity;
 import ecs.System;
 import ecs.World;
-
 import ecs.components.PositionComponent;
 import ecs.components.SizeComponent;
 import ecs.entities.PlayerEntity;
 import ecs.systems.PlayerDrawingSystem;
 import ecs.systems.PlayerMovementSystem;
-
-import java.awt.Dimension;
 
 public class Game implements Runnable {
     private static final Dimension WINDOW_SIZE = new Dimension(1280, 720);

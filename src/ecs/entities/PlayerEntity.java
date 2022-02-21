@@ -2,15 +2,13 @@ package ecs.entities;
 
 import ecs.Component;
 import ecs.Entity;
-
 import ecs.components.PlayerComponent;
 import ecs.components.PositionComponent;
 import ecs.components.SizeComponent;
 
 public class PlayerEntity extends Entity {
-    public PlayerComponent player;
-    public PositionComponent position;
-    public SizeComponent size;
+    private final PositionComponent position;
+    private final SizeComponent size;
 
     public PlayerEntity(PositionComponent position, SizeComponent size) {
         super(new Component[] { new PlayerComponent(),
@@ -18,8 +16,25 @@ public class PlayerEntity extends Entity {
                 size,
         });
 
-        this.player = (PlayerComponent) this.components.get(0);
         this.position = position;
         this.size = size;
+    }
+
+    public PositionComponent getPosition() {
+        return position;
+    }
+
+    public void setPosition(float x, float y) {
+        this.position.xPos = x;
+        this.position.yPos = y;
+    }
+
+    public SizeComponent getSize() {
+        return size;
+    }
+
+    public void setSize(float width, float height) {
+        size.setWidth(width);
+        size.setHeight(height);
     }
 }

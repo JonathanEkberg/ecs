@@ -18,7 +18,7 @@ public class PlayerMovementSystem extends System {
     protected void perform(PerformState state) {
         PlayerEntity pe = (PlayerEntity) state.getEntity();
 
-        pe.position.xPos = ((int) (Math.random() * 100) + 50);
-        pe.position.yPos = ((int) (Math.random() * 100) + 50);
+        pe.getPosition().xPos = ((int) (Math.random() * 100) + 50);
+        pe.getPosition().yPos = ((int) (Math.random() * 100) + 50);
     }
 }
