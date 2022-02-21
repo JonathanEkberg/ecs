@@ -2,7 +2,6 @@ package ecs.systems;
 
 import ecs.PerformState;
 import ecs.System;
-import ecs.Util;
 import ecs.components.PlayerComponent;
 import ecs.components.PositionComponent;
 import ecs.entities.PlayerEntity;
@@ -17,7 +16,6 @@ public class PlayerMovementSystem extends System {
 
     @Override
     protected void perform(PerformState state) {
-        Util.println("HEY");
         PlayerEntity pe = (PlayerEntity) state.getEntity();
 
         pe.getPosition().xPos = ((int) (Math.random() * 100) + 50);

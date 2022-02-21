@@ -24,7 +24,6 @@ public abstract class System {
                         break;
                     }
 
-                    Util.println("PERFORM 1");
                     perform(new PerformState(entity, graphics));
                     previouslyUsed.add(entity);
                 }
@@ -33,7 +32,6 @@ public abstract class System {
         }
 
         for (Entity entity : previouslyUsed) {
-            Util.println("PERFORM 1");
             perform(new PerformState(entity, graphics));
         }
     }
