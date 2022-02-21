@@ -20,7 +20,6 @@ public class World {
         ExecuteState state = new ExecuteState(g, entities);
 
         for (System system : systems) {
-            Util.println(system);
             system.execute(state);
         }
     }

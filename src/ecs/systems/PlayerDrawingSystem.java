@@ -1,8 +1,9 @@
 package ecs.systems;
 
+import java.awt.Graphics;
+
 import ecs.PerformState;
 import ecs.System;
-import ecs.Util;
 import ecs.components.PlayerComponent;
 import ecs.entities.PlayerEntity;
 
@@ -15,17 +16,16 @@ public class PlayerDrawingSystem extends System {
 
     @Override
     public void perform(PerformState state) {
-        Util.println("HEY");
         PlayerEntity playerEntity = (PlayerEntity) state.getEntity();
+        Graphics g = state.getGraphics();
 
-        int x = (int) playerEntity.getPosition().xPos;
-        int y = (int) playerEntity.getPosition().yPos;
+        int x = (int) playerEntity.getPosition().getPosX();
+        int y = (int) playerEntity.getPosition().getPosY();
 
         int width = (int) playerEntity.getSize().getWidth();
         int height = (int) playerEntity.getSize().getHeight();
 
-        Util.print(String.format("%d %d %d %d", x, y, width, height));
-
-        state.getGraphics().fillRect(x, y, width, height);
+        g.setColor(playerEntity.getColor().getColor());
+        g.fillRect(x, y, width, height);
     }
 }
