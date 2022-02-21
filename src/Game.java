@@ -18,7 +18,6 @@ public class Game implements Runnable {
     private static final Dimension MINIMUM_WINDOW_SIZE = new Dimension(600, 400);
 
     private final World world;
-    private JFrame frame;
 
     public Game() {
         Entity[] entities = new Entity[] {
@@ -33,7 +32,7 @@ public class Game implements Runnable {
 
     @Override
     public void run() {
-        this.frame = new JFrame("Game");
+        JFrame frame = new JFrame("Game");
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setMinimumSize(MINIMUM_WINDOW_SIZE);
