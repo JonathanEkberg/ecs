@@ -6,6 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.WeakHashMap;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util;
+
+import org.w3c.dom.events.EventTarget;
+
 import ecs.Component;
 import ecs.Entity;
 import ecs.PerformState;
@@ -18,7 +22,7 @@ import ecs.components.SizeComponent;
 public final class PlayerDrawingSystem extends System {
     private static final Set<Class<?>> components = new HashSet<>(
             Arrays.asList(PlayerComponent.class, PositionComponent.class, SizeComponent.class, ColorComponent.class));
-    private static final WeakHashMap<Integer, Component[]> componentMap = new WeakHashMap<>();
+    private static final WeakHashMap<Entity, Component[]> componentMap = new WeakHashMap<>(7_000);
 
     public PlayerDrawingSystem() {
         super(components);
@@ -35,18 +39,18 @@ public final class PlayerDrawingSystem extends System {
         SizeComponent size;
         ColorComponent color;
 
-        if (!componentMap.containsKey(entity.hashCode())) {
+        if (!componentMap.containsKey(entity)) {
             position = entity.getComponent(PositionComponent.class);
             size = entity.getComponent(SizeComponent.class);
             color = entity.getComponent(ColorComponent.class);
 
-            componentMap.put(entity.hashCode(), new Component[] { position, size, color });
+            componentMap.put(entity, new Component[] { position, size, color });
         } else {
-            Component[] components = componentMap.get(entity.hashCode());
+            Component[] cachedComponents = componentMap.get(entity);
 
-            position = (PositionComponent) components[0];
-            size = (SizeComponent) components[1];
-            color = (ColorComponent) components[2];
+            position = (PositionComponent) cachedComponents[0];
+            size = (SizeComponent) cachedComponents[1];
+            color = (ColorComponent) cachedComponents[2];
         }
 
         int x = (int) position.getPosX();
