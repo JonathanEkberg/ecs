@@ -8,6 +8,8 @@ public final class World {
     private final ArrayList<Entity> entities;
     private boolean hasChanged = false;
 
+    private int previousDrawDelta;
+
     public World(Entity[] entities, System[] systems) {
         this.systems = systems;
         this.entities = new ArrayList<>(entities.length);
@@ -29,11 +31,17 @@ public final class World {
      * @param g
      */
     public void execute(Graphics graphics, int fps, int delta) {
-        ExecuteState state = new ExecuteState(graphics, fps, delta, entities, hasChanged);
+        ExecuteState state = new ExecuteState(graphics, fps, delta, previousDrawDelta, entities, hasChanged);
         hasChanged = false;
 
         for (System system : systems) {
-            system.execute(state);
+            if (system.debug()) {
+                long start = java.lang.System.nanoTime();
+                system.execute(new ExecuteState(graphics, fps, delta, previousDrawDelta, entities, hasChanged));
+                previousDrawDelta = (int) ((java.lang.System.nanoTime() - start) / 1_000_000);
+            } else {
+                system.execute(state);
+            }
         }
     }
 }

@@ -27,6 +27,7 @@ public class Game implements Runnable {
         Random rand = new Random();
 
         Entity[] entities = new Entity[7_000];
+
         for (int i = 0; i < entities.length; i++) {
             float xPos = (float) (Math.random() * WINDOW_SIZE.getWidth());
             float yPos = (float) (Math.random() * WINDOW_SIZE.getHeight());

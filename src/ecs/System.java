@@ -27,9 +27,12 @@ public abstract class System {
      */
     public void execute(ExecuteState state) {
         Graphics graphics = state.getGraphics();
+        int fps = state.getFps();
+        int delta = state.getDelta();
+        int drawDelta = state.getDrawDelta();
 
         if (this.dependencies.isEmpty()) {
-            perform(new PerformState(null, graphics, state.getFps(), state.getDelta()));
+            perform(null, graphics, fps, delta, drawDelta);
         }
 
         // Only search for new entities if entities have been added or removed.
@@ -42,7 +45,7 @@ public abstract class System {
                         break;
                     }
 
-                    perform(new PerformState(entity, graphics, state.getFps(), state.getDelta()));
+                    perform(entity, graphics, fps, delta, drawDelta);
                     entities.add(entity);
                 }
             }
@@ -51,9 +54,11 @@ public abstract class System {
 
         // Perform on the entities with correct components.
         for (Entity entity : entities) {
-            perform(new PerformState(entity, graphics, state.getFps(), state.getDelta()));
+            perform(entity, graphics, fps, delta, drawDelta);
         }
     }
+
+    protected abstract boolean debug();
 
     /**
      * Mutates or reads the entities components and draws to graphics as is required
@@ -61,5 +66,5 @@ public abstract class System {
      * 
      * @param state - The state of the perform.
      */
-    protected abstract void perform(PerformState state);
+    protected abstract void perform(Entity entity, Graphics graphics, int fps, int delta, int drawDelta);
 }

@@ -7,10 +7,10 @@ public class ExecuteState extends PerformState {
     private List<Entity> entities;
     private boolean hasChanged;
 
-    public ExecuteState(Graphics graphics, int fps, int delta,
+    public ExecuteState(Graphics graphics, int fps, int delta, int drawDelta,
             List<Entity> entities,
             boolean hasChanged) {
-        super(null, graphics, fps, delta);
+        super(null, graphics, fps, delta, drawDelta);
         this.entities = entities;
         this.hasChanged = hasChanged;
     }
