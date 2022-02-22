@@ -1,31 +1,40 @@
 package ecs.systems;
 
 import java.awt.Graphics;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import ecs.PerformState;
 import ecs.System;
+import ecs.components.ColorComponent;
 import ecs.components.PlayerComponent;
-import ecs.entities.PlayerEntity;
+import ecs.components.PositionComponent;
+import ecs.components.SizeComponent;
 
-public class PlayerDrawingSystem extends System {
+public final class PlayerDrawingSystem extends System {
+    private static final Set<Class<?>> components = new HashSet<>(
+            Arrays.asList(PlayerComponent.class, PositionComponent.class, SizeComponent.class, ColorComponent.class));
+
     public PlayerDrawingSystem() {
-        super(new Class<?>[] {
-                PlayerComponent.class
-        });
+        super(components);
     }
 
     @Override
     public void perform(PerformState state) {
-        PlayerEntity playerEntity = (PlayerEntity) state.getEntity();
         Graphics g = state.getGraphics();
 
-        int x = (int) playerEntity.getPosition().getPosX();
-        int y = (int) playerEntity.getPosition().getPosY();
+        PositionComponent position = state.getEntity().getComponent(PositionComponent.class);
+        SizeComponent size = state.getEntity().getComponent(SizeComponent.class);
+        ColorComponent color = state.getEntity().getComponent(ColorComponent.class);
 
-        int width = (int) playerEntity.getSize().getWidth();
-        int height = (int) playerEntity.getSize().getHeight();
+        int x = (int) position.getPosX();
+        int y = (int) position.getPosY();
 
-        g.setColor(playerEntity.getColor().getColor());
+        int width = (int) size.getWidth();
+        int height = (int) size.getHeight();
+
+        g.setColor(color.getColor());
         g.fillRect(x, y, width, height);
     }
 }

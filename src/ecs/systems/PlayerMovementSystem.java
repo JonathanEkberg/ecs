@@ -1,17 +1,21 @@
 package ecs.systems;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import ecs.PerformState;
 import ecs.System;
 import ecs.components.PlayerComponent;
 import ecs.components.PositionComponent;
 import ecs.entities.PlayerEntity;
 
-public class PlayerMovementSystem extends System {
+public final class PlayerMovementSystem extends System {
+    private static final Set<Class<?>> components = new HashSet<>(
+            Arrays.asList(PlayerComponent.class, PositionComponent.class));
+
     public PlayerMovementSystem() {
-        super(new Class<?>[] {
-                PlayerComponent.class,
-                PositionComponent.class
-        });
+        super(components);
     }
 
     @Override

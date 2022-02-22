@@ -8,7 +8,7 @@ import javax.swing.Timer;
 import ecs.World;
 
 public class Panel extends JPanel implements ActionListener {
-    private static final float FPS = 144;
+    private static final float FPS = 60;
 
     private final transient World world;
     private final Timer timer;

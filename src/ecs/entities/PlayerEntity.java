@@ -1,6 +1,8 @@
 package ecs.entities;
 
-import ecs.Component;
+import java.util.Arrays;
+import java.util.HashSet;
+
 import ecs.Entity;
 import ecs.components.ColorComponent;
 import ecs.components.PlayerComponent;
@@ -13,10 +15,10 @@ public class PlayerEntity extends Entity {
     private final ColorComponent color;
 
     public PlayerEntity(PositionComponent position, SizeComponent size, ColorComponent color) {
-        super(new Component[] { new PlayerComponent(),
+        super(new HashSet<>(Arrays.asList(new PlayerComponent(),
                 position,
                 size,
-        });
+                color)));
 
         this.position = position;
         this.size = size;
