@@ -28,8 +28,8 @@ public final class World {
      * 
      * @param g
      */
-    public void execute(Graphics g) {
-        ExecuteState state = new ExecuteState(g, entities, hasChanged);
+    public void execute(Graphics graphics, int fps, int delta) {
+        ExecuteState state = new ExecuteState(graphics, fps, delta, entities, hasChanged);
         hasChanged = false;
 
         for (System system : systems) {

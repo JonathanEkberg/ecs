@@ -3,19 +3,16 @@ package ecs;
 import java.awt.Graphics;
 import java.util.List;
 
-public class ExecuteState {
-    private Graphics graphics;
+public class ExecuteState extends PerformState {
     private List<Entity> entities;
     private boolean hasChanged;
 
-    public ExecuteState(Graphics graphics, List<Entity> entities, boolean hasChanged) {
-        this.graphics = graphics;
+    public ExecuteState(Graphics graphics, int fps, int delta,
+            List<Entity> entities,
+            boolean hasChanged) {
+        super(null, graphics, fps, delta);
         this.entities = entities;
         this.hasChanged = hasChanged;
-    }
-
-    public Graphics getGraphics() {
-        return graphics;
     }
 
     public List<Entity> getEntities() {
@@ -25,4 +22,5 @@ public class ExecuteState {
     public boolean getHasChanged() {
         return hasChanged;
     }
+
 }

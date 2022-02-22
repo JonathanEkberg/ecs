@@ -7,12 +7,12 @@ import javax.swing.WindowConstants;
 
 import ecs.Entity;
 import ecs.System;
-import ecs.Util;
 import ecs.World;
 import ecs.components.ColorComponent;
 import ecs.components.PositionComponent;
 import ecs.components.SizeComponent;
 import ecs.entities.PlayerEntity;
+import ecs.systems.FpsDrawingSystem;
 import ecs.systems.PlayerDrawingSystem;
 import ecs.systems.PlayerMovementSystem;
 
@@ -21,11 +21,12 @@ public class Game implements Runnable {
     private static final Dimension MINIMUM_WINDOW_SIZE = new Dimension(600, 400);
 
     private final World world;
+    private final Panel panel;
 
     public Game() {
         Random rand = new Random();
 
-        Entity[] entities = new Entity[10_000];
+        Entity[] entities = new Entity[7_000];
         for (int i = 0; i < entities.length; i++) {
             float xPos = (float) (Math.random() * WINDOW_SIZE.getWidth());
             float yPos = (float) (Math.random() * WINDOW_SIZE.getHeight());
@@ -44,9 +45,11 @@ public class Game implements Runnable {
 
         System[] systems = new System[] {
                 new PlayerDrawingSystem(),
-                new PlayerMovementSystem()
+                new PlayerMovementSystem(),
+                new FpsDrawingSystem()
         };
         this.world = new World(entities, systems);
+        panel = new Panel(world);
     }
 
     @Override
@@ -58,10 +61,12 @@ public class Game implements Runnable {
         frame.setSize(WINDOW_SIZE);
         frame.setPreferredSize(WINDOW_SIZE);
         frame.setLocationRelativeTo(null);
-        frame.add(new Panel(world));
+        frame.add(panel);
 
         frame.pack();
         frame.setVisible(true);
+
+        panel.run();
     }
 
     public World getWorld() {

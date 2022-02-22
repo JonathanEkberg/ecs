@@ -1,23 +1,37 @@
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 import ecs.World;
 
-public class Panel extends JPanel implements ActionListener {
-    private static final float FPS = 60;
+public class Panel extends JPanel implements Runnable {
+    private boolean run = true;
+
+    private int fpsPrintInterval = 500;
+    private int fps;
+    private int delta;
+    private int frames;
+    private long totalTime;
 
     private final transient World world;
-    private final Timer timer;
 
     public Panel(World world) {
         this.world = world;
+    }
 
-        timer = new Timer((int) (1000 / FPS), this);
-        timer.start();
+    public int getFps() {
+        return fps;
+    }
+
+    @Override
+    public void run() {
+        start();
+    }
+
+    private void start() {
+        while (run) {
+            update();
+        }
     }
 
     private void update() {
@@ -25,13 +39,19 @@ public class Panel extends JPanel implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        update();
-    }
-
-    @Override
     public void paint(Graphics g) {
         super.paint(g);
-        world.execute(g);
+        long start = (System.nanoTime() / 1_000_000);
+        world.execute(g, fps, delta);
+        delta = (int) ((System.nanoTime() / 1_000_000) - start);
+        frames++;
+        totalTime += delta;
+
+        if (totalTime > fpsPrintInterval) {
+            fps = (short) (frames * (1000 / fpsPrintInterval));
+            frames = 0;
+            totalTime = 0;
+            System.out.println("FPS: " + fps);
+        }
     }
 }

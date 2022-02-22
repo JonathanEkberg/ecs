@@ -28,6 +28,10 @@ public abstract class System {
     public void execute(ExecuteState state) {
         Graphics graphics = state.getGraphics();
 
+        if (this.dependencies.isEmpty()) {
+            perform(new PerformState(null, graphics, state.getFps(), state.getDelta()));
+        }
+
         // Only search for new entities if entities have been added or removed.
         if (!state.getHasChanged()) {
             entities = new ArrayList<>();
@@ -38,7 +42,7 @@ public abstract class System {
                         break;
                     }
 
-                    perform(new PerformState(entity, graphics));
+                    perform(new PerformState(entity, graphics, state.getFps(), state.getDelta()));
                     entities.add(entity);
                 }
             }
@@ -47,7 +51,7 @@ public abstract class System {
 
         // Perform on the entities with correct components.
         for (Entity entity : entities) {
-            perform(new PerformState(entity, graphics));
+            perform(new PerformState(entity, graphics, state.getFps(), state.getDelta()));
         }
     }
 
