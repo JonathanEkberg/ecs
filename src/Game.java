@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -22,21 +23,20 @@ public class Game implements Runnable {
     private final World world;
 
     public Game() {
-        Entity[] entities = new Entity[100000];
+        Random rand = new Random();
 
-        Util.println(WINDOW_SIZE.getWidth());
-        Util.println(WINDOW_SIZE.getHeight());
+        Entity[] entities = new Entity[10_000];
         for (int i = 0; i < entities.length; i++) {
             float xPos = (float) (Math.random() * WINDOW_SIZE.getWidth());
             float yPos = (float) (Math.random() * WINDOW_SIZE.getHeight());
             PositionComponent position = new PositionComponent(xPos, yPos);
 
-            float dimension = (float) (Math.random() * 100 + 50);
+            float dimension = (float) (Math.random() * 200 + 20);
             SizeComponent size = new SizeComponent(dimension, dimension);
 
-            int r = (int) (Math.random() * 255);
-            int g = (int) (Math.random() * 255);
-            int b = (int) (Math.random() * 255);
+            int r = rand.nextInt(255) + 1;
+            int g = rand.nextInt(255) + 1;
+            int b = rand.nextInt(255) + 1;
             ColorComponent color = new ColorComponent(new Color(r, g, b));
 
             entities[i] = new PlayerEntity(position, size, color);
