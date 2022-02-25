@@ -22,11 +22,6 @@ public final class BoidMovementSystem extends EcsSystem {
     }
 
     @Override
-    protected boolean debug() {
-        return false;
-    }
-
-    @Override
     protected void perform(Entity entity, Graphics graphics, int fps, int delta, int frame, int drawDelta) {
         BoidEntity pe = (BoidEntity) entity;
 
@@ -35,6 +30,11 @@ public final class BoidMovementSystem extends EcsSystem {
 
         float xOffset = (float) (Math.cos(angle) * speed);
         float yOffset = (float) (Math.sin(angle) * speed);
+
+        // System.out.println(Math.toDegrees(Math.atan2(xOffset, yOffset)));
+        // System.out.println(xOffset);
+        // System.out.println(yOffset);
+        // System.out.println();
 
         pe.position().move(xOffset, yOffset);
     }

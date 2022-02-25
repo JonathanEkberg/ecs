@@ -20,11 +20,6 @@ public final class PlayerMovementSystem extends EcsSystem {
     }
 
     @Override
-    protected boolean debug() {
-        return false;
-    }
-
-    @Override
     protected void perform(Entity entity, Graphics graphics, int fps, int delta, int frame, int drawDelta) {
         PlayerEntity pe = (PlayerEntity) entity;
 

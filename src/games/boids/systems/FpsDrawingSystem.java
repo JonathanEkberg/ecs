@@ -20,11 +20,6 @@ public class FpsDrawingSystem extends EcsSystem {
     }
 
     @Override
-    protected boolean debug() {
-        return false;
-    }
-
-    @Override
     protected void perform(Entity entity, Graphics graphics, int fps, int delta, int frame, int drawDelta) {
         Graphics2D g = (Graphics2D) graphics;
         String fpsStr = String.format("%d FPS", fps);

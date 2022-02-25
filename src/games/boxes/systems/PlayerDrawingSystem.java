@@ -24,11 +24,6 @@ public final class PlayerDrawingSystem extends EcsSystem {
     }
 
     @Override
-    protected boolean debug() {
-        return true;
-    }
-
-    @Override
     public void perform(Entity entity, Graphics graphics, int fps, int delta, int frame, int drawDelta) {
         PositionComponent position;
         SizeComponent size;

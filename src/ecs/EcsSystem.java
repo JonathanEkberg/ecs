@@ -35,8 +35,6 @@ public abstract class EcsSystem {
         return dependencies;
     }
 
-    protected abstract boolean debug();
-
     /**
      * Mutates or reads the entities components and draws to graphics as is required
      * by the system.
