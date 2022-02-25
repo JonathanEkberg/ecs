@@ -1,4 +1,8 @@
+package graphics;
+
 import java.awt.Graphics;
+import java.awt.RenderingHints;
+import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
@@ -27,12 +31,21 @@ public class Panel extends JPanel implements Runnable {
     public void run() {
         while (run) {
             repaint();
+            try {
+                Thread.sleep(16);
+            } catch (Exception e) {
+                System.exit(1);
+            }
         }
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        // Set anti-alias!
+
+        ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
 
         long start = (System.nanoTime() / 1_000_000);
         world.execute(g, fps, delta, frame);

@@ -1,4 +1,4 @@
-package ecs.systems;
+package games.boids.systems;
 
 import java.awt.Color;
 import java.awt.Font;

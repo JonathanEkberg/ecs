@@ -1,4 +1,4 @@
-package ecs.systems;
+package games.boxes.systems;
 
 import java.awt.Graphics;
 import java.util.Arrays;
@@ -7,9 +7,9 @@ import java.util.Set;
 
 import ecs.EcsSystem;
 import ecs.Entity;
-import ecs.components.PlayerComponent;
-import ecs.components.PositionComponent;
-import ecs.entities.PlayerEntity;
+import games.boxes.components.PlayerComponent;
+import games.boxes.components.PositionComponent;
+import games.boxes.entities.PlayerEntity;
 
 public final class PlayerMovementSystem extends EcsSystem {
     private static final Set<Class<?>> components = new HashSet<>(

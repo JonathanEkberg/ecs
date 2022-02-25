@@ -1,13 +1,13 @@
-package ecs.entities;
+package games.boxes.entities;
 
 import java.util.Arrays;
 import java.util.HashSet;
 
 import ecs.Entity;
-import ecs.components.ColorComponent;
-import ecs.components.PlayerComponent;
-import ecs.components.PositionComponent;
-import ecs.components.SizeComponent;
+import games.boxes.components.ColorComponent;
+import games.boxes.components.PlayerComponent;
+import games.boxes.components.PositionComponent;
+import games.boxes.components.SizeComponent;
 
 public class PlayerEntity extends Entity {
     private final PositionComponent position;

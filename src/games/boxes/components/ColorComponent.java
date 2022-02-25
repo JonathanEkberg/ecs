@@ -1,4 +1,4 @@
-package ecs.components;
+package games.boxes.components;
 
 import java.awt.Color;
 

@@ -1,16 +1,20 @@
+package games.boxes;
+
 import java.awt.Color;
 import java.util.Random;
 
 import ecs.EcsSystem;
 import ecs.Entity;
 import ecs.World;
-import ecs.components.ColorComponent;
-import ecs.components.PositionComponent;
-import ecs.components.SizeComponent;
-import ecs.entities.PlayerEntity;
-import ecs.systems.FpsDrawingSystem;
-import ecs.systems.PlayerDrawingSystem;
-import ecs.systems.PlayerMovementSystem;
+import games.boxes.components.ColorComponent;
+import games.boxes.components.PositionComponent;
+import games.boxes.components.SizeComponent;
+import games.boxes.entities.PlayerEntity;
+import games.boxes.systems.FpsDrawingSystem;
+import games.boxes.systems.PlayerDrawingSystem;
+import games.boxes.systems.PlayerMovementSystem;
+import graphics.Panel;
+import graphics.Window;
 
 public final class Game implements Runnable {
     private static final Random rand = new Random();

@@ -1,4 +1,4 @@
-package ecs.systems;
+package games.boxes.systems;
 
 import java.awt.Graphics;
 import java.util.Arrays;
@@ -9,10 +9,10 @@ import java.util.WeakHashMap;
 import ecs.Component;
 import ecs.EcsSystem;
 import ecs.Entity;
-import ecs.components.ColorComponent;
-import ecs.components.PlayerComponent;
-import ecs.components.PositionComponent;
-import ecs.components.SizeComponent;
+import games.boxes.components.ColorComponent;
+import games.boxes.components.PlayerComponent;
+import games.boxes.components.PositionComponent;
+import games.boxes.components.SizeComponent;
 
 public final class PlayerDrawingSystem extends EcsSystem {
     private static final Set<Class<?>> components = new HashSet<>(
