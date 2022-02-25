@@ -1,17 +1,17 @@
 package ecs.systems;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.HashSet;
 import java.util.Set;
-import java.awt.Color;
-import java.awt.Font;
 
+import ecs.EcsSystem;
 import ecs.Entity;
-import ecs.System;
 
-public class FpsDrawingSystem extends System {
+public class FpsDrawingSystem extends EcsSystem {
     private static final Set<Class<?>> components = new HashSet<>();
     private static final Font f = new Font("Comic Sans MS", Font.PLAIN, 16);
 
@@ -25,7 +25,7 @@ public class FpsDrawingSystem extends System {
     }
 
     @Override
-    protected void perform(Entity entity, Graphics graphics, int fps, int delta, int drawDelta) {
+    protected void perform(Entity entity, Graphics graphics, int fps, int delta, int frame, int drawDelta) {
         Graphics2D g = (Graphics2D) graphics;
         String fpsStr = String.format("%d FPS", fps);
         String deltaStr = String.format("Frame: %dms", delta);

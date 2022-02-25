@@ -3,19 +3,17 @@ package ecs.systems;
 import java.awt.Graphics;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 
+import ecs.EcsSystem;
 import ecs.Entity;
-import ecs.System;
 import ecs.components.PlayerComponent;
 import ecs.components.PositionComponent;
 import ecs.entities.PlayerEntity;
 
-public final class PlayerMovementSystem extends System {
+public final class PlayerMovementSystem extends EcsSystem {
     private static final Set<Class<?>> components = new HashSet<>(
             Arrays.asList(PlayerComponent.class, PositionComponent.class));
-    private static final Random random = new Random();
 
     public PlayerMovementSystem() {
         super(components);
@@ -27,17 +25,12 @@ public final class PlayerMovementSystem extends System {
     }
 
     @Override
-    protected void perform(Entity entity, Graphics graphics, int fps, int delta, int drawDelta) {
+    protected void perform(Entity entity, Graphics graphics, int fps, int delta, int frame, int drawDelta) {
         PlayerEntity pe = (PlayerEntity) entity;
 
-        int pos = random.nextInt(2);
+        float xPos = (float) (Math.cos(frame / 100d) * (delta / 10d));
+        float yPos = (float) (Math.sin(frame / 100d) * (delta / 10d));
 
-        if (pos == 0) {
-            pos = -2;
-        } else {
-            pos = 2;
-        }
-
-        pe.getPosition().move(pos, pos);
+        pe.getPosition().move(xPos, yPos);
     }
 }

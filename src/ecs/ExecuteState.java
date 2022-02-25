@@ -1,26 +1,14 @@
 package ecs;
 
-import java.awt.Graphics;
-import java.util.List;
-
 public class ExecuteState extends PerformState {
-    private List<Entity> entities;
-    private boolean hasChanged;
+    private Entity[] entities;
 
-    public ExecuteState(Graphics graphics, int fps, int delta, int drawDelta,
-            List<Entity> entities,
-            boolean hasChanged) {
-        super(null, graphics, fps, delta, drawDelta);
+    public ExecuteState(int fps, int delta, int drawDelta, Entity[] entities) {
+        super(fps, delta, drawDelta);
         this.entities = entities;
-        this.hasChanged = hasChanged;
     }
 
-    public List<Entity> getEntities() {
+    public Entity[] getEntities() {
         return entities;
     }
-
-    public boolean getHasChanged() {
-        return hasChanged;
-    }
-
 }

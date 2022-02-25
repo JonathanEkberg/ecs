@@ -10,7 +10,7 @@ public class Panel extends JPanel implements Runnable {
     private int fpsPrintInterval = 500;
     private int fps;
     private int delta;
-    private int frames;
+    private int frame;
     private long totalTime;
 
     private final transient World world;
@@ -25,33 +25,25 @@ public class Panel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        start();
-    }
-
-    private void start() {
         while (run) {
-            update();
+            repaint();
         }
-    }
-
-    private void update() {
-        repaint();
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+
         long start = (System.nanoTime() / 1_000_000);
-        world.execute(g, fps, delta);
+        world.execute(g, fps, delta, frame);
         delta = (int) ((System.nanoTime() / 1_000_000) - start);
-        frames++;
+        frame++;
         totalTime += delta;
 
         if (totalTime > fpsPrintInterval) {
-            fps = (short) (frames * (1000 / fpsPrintInterval));
-            frames = 0;
+            fps = frame * (1000 / fpsPrintInterval);
+            frame = 0;
             totalTime = 0;
-            System.out.println("FPS: " + fps);
         }
     }
 }

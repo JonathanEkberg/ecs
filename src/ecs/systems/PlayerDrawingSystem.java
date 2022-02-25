@@ -6,20 +6,15 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util;
-
-import org.w3c.dom.events.EventTarget;
-
 import ecs.Component;
+import ecs.EcsSystem;
 import ecs.Entity;
-import ecs.PerformState;
-import ecs.System;
 import ecs.components.ColorComponent;
 import ecs.components.PlayerComponent;
 import ecs.components.PositionComponent;
 import ecs.components.SizeComponent;
 
-public final class PlayerDrawingSystem extends System {
+public final class PlayerDrawingSystem extends EcsSystem {
     private static final Set<Class<?>> components = new HashSet<>(
             Arrays.asList(PlayerComponent.class, PositionComponent.class, SizeComponent.class, ColorComponent.class));
     private static final WeakHashMap<Entity, Component[]> componentMap = new WeakHashMap<>(7_000);
@@ -34,7 +29,7 @@ public final class PlayerDrawingSystem extends System {
     }
 
     @Override
-    public void perform(Entity entity, Graphics graphics, int fps, int delta, int drawDelta) {
+    public void perform(Entity entity, Graphics graphics, int fps, int delta, int frame, int drawDelta) {
         PositionComponent position;
         SizeComponent size;
         ColorComponent color;
