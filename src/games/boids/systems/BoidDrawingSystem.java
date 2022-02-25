@@ -22,11 +22,6 @@ public final class BoidDrawingSystem extends EcsSystem {
     }
 
     @Override
-    protected boolean debug() {
-        return true;
-    }
-
-    @Override
     public void perform(Entity entity, Graphics graphics, int fps, int delta, int frame, int drawDelta) {
         PositionComponent position = entity.getComponent(PositionComponent.class);
         AngleComponent angle = entity.getComponent(AngleComponent.class);
@@ -35,17 +30,17 @@ public final class BoidDrawingSystem extends EcsSystem {
         int width = 40;
         int[][] positions = getTrianglePositions(position, angle, width);
 
-        // OVERFLOW DETECTION SHOULD NOT BE HERE CHANGE THIS IN THE NEAR FUTURE
-        for (int i = 0; i < positions.length; i++) {
-            for (int j = 0; j < positions.length; j++) {
-                if (positions[i][j] < 0) {
-                    position.set((Window.WINDOW_SIZE.getWidth() - width * 1.25),
-                            (float) (Window.WINDOW_SIZE.getHeight() - width * 1.25));
-                    angle.set(3 * (Math.PI / 4));
-                    positions = getTrianglePositions(position, angle, width);
-                }
-            }
-        }
+        // // OVERFLOW DETECTION SHOULD NOT BE HERE CHANGE THIS IN THE NEAR FUTURE
+        // for (int i = 0; i < positions.length; i++) {
+        // for (int j = 0; j < positions.length; j++) {
+        // if (positions[i][j] < 0) {
+        // position.set((Window.WINDOW_SIZE.getWidth() - width * 1.25),
+        // (float) (Window.WINDOW_SIZE.getHeight() - width * 1.25));
+        // angle.set(3 * (Math.PI / 4));
+        // positions = getTrianglePositions(position, angle, width);
+        // }
+        // }
+        // }
 
         graphics.setColor(color.getColor());
         graphics.fillPolygon(positions[0], positions[1], 3);
@@ -59,7 +54,7 @@ public final class BoidDrawingSystem extends EcsSystem {
                 (int) (x + ((width / 3d) * Math.cos(angle.rad() + ((3 * Math.PI) / 2))))
         };
 
-        int y = (int) pos.x();
+        int y = (int) pos.y();
         int[] yPoints = new int[] {
                 (int) (y + (width * Math.sin(angle.rad()))),
                 (int) (y + ((width / 3d) * Math.sin(angle.rad() + (Math.PI / 2)))),
